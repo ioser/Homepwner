@@ -20,11 +20,11 @@
 		9A1E20D1159AD56000802C13 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9A1E20D3159AD56000802C13 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9A1E20D5159AD56000802C13 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		9A1E20D9159AD56000802C13 /* Homepwner-Info.plist */ = {isa = PBXFileReference; path = "Homepwner-Info.plist"; sourceTree = "<group>"; };
+		9A1E20D9159AD56000802C13 /* Homepwner-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Homepwner-Info.plist"; sourceTree = "<group>"; };
 		9A1E20DB159AD56000802C13 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9A1E20DD159AD56000802C13 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9A1E20DF159AD56000802C13 /* Homepwner-Prefix.pch */ = {isa = PBXFileReference; path = "Homepwner-Prefix.pch"; sourceTree = "<group>"; };
-		9A1E20E0159AD56000802C13 /* HomepwnerAppDelegate.h */ = {isa = PBXFileReference; path = HomepwnerAppDelegate.h; sourceTree = "<group>"; };
+		9A1E20DF159AD56000802C13 /* Homepwner-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Homepwner-Prefix.pch"; sourceTree = "<group>"; };
+		9A1E20E0159AD56000802C13 /* HomepwnerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomepwnerAppDelegate.h; sourceTree = "<group>"; };
 		9A1E20E1159AD56000802C13 /* HomepwnerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomepwnerAppDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
