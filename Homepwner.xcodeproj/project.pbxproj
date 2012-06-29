@@ -13,6 +13,8 @@
 		9A1E20DC159AD56000802C13 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A1E20DA159AD56000802C13 /* InfoPlist.strings */; };
 		9A1E20DE159AD56000802C13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1E20DD159AD56000802C13 /* main.m */; };
 		9A1E20E2159AD56000802C13 /* HomepwnerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1E20E1159AD56000802C13 /* HomepwnerAppDelegate.m */; };
+		9A212403159C1FD0009C3165 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A212402159C1FD0009C3165 /* ItemsViewController.m */; };
+		9A212409159D7D69009C3165 /* BNRItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A212408159D7D69009C3165 /* BNRItemStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,12 @@
 		9A1E20DF159AD56000802C13 /* Homepwner-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Homepwner-Prefix.pch"; sourceTree = "<group>"; };
 		9A1E20E0159AD56000802C13 /* HomepwnerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomepwnerAppDelegate.h; sourceTree = "<group>"; };
 		9A1E20E1159AD56000802C13 /* HomepwnerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomepwnerAppDelegate.m; sourceTree = "<group>"; };
+		9A212401159C1FD0009C3165 /* ItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsViewController.h; sourceTree = "<group>"; };
+		9A212402159C1FD0009C3165 /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
+		9A212405159D7C55009C3165 /* BNRItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BNRItem.h; sourceTree = "<group>"; };
+		9A212406159D7C55009C3165 /* BNRItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
+		9A212407159D7D69009C3165 /* BNRItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemStore.h; sourceTree = "<group>"; };
+		9A212408159D7D69009C3165 /* BNRItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +82,13 @@
 			children = (
 				9A1E20E0159AD56000802C13 /* HomepwnerAppDelegate.h */,
 				9A1E20E1159AD56000802C13 /* HomepwnerAppDelegate.m */,
+				9A212405159D7C55009C3165 /* BNRItem.h */,
+				9A212406159D7C55009C3165 /* BNRItem.m */,
+				9A212407159D7D69009C3165 /* BNRItemStore.h */,
+				9A212408159D7D69009C3165 /* BNRItemStore.m */,
 				9A1E20D8159AD56000802C13 /* Supporting Files */,
+				9A212401159C1FD0009C3165 /* ItemsViewController.h */,
+				9A212402159C1FD0009C3165 /* ItemsViewController.m */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -154,6 +168,8 @@
 			files = (
 				9A1E20DE159AD56000802C13 /* main.m in Sources */,
 				9A1E20E2159AD56000802C13 /* HomepwnerAppDelegate.m in Sources */,
+				9A212403159C1FD0009C3165 /* ItemsViewController.m in Sources */,
+				9A212409159D7D69009C3165 /* BNRItemStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +273,7 @@
 				9A1E20E7159AD56000802C13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
