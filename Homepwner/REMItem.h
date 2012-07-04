@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BNRItem : NSObject
+@interface REMItem : NSObject
 {
 //    NSString *itemName;
 //    NSString *serialNumber;
@@ -21,11 +21,11 @@
 
 + (id)randomItem;
 
-@property (nonatomic, strong) BNRItem *containedItem;
+@property (nonatomic, strong) REMItem *containedItem;
 //- (void)setContainedItem:(BNRItem *)item;
 //- (BNRItem *)containedItem;
 
-@property (nonatomic, weak) BNRItem *container;
+@property (nonatomic, weak) REMItem *container;
 //- (void)setContainer:(BNRItem *)item;
 //- (BNRItem *)getContainer;
 

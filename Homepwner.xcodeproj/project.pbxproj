@@ -15,6 +15,7 @@
 		9A1E20E2159AD56000802C13 /* HomepwnerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A1E20E1159AD56000802C13 /* HomepwnerAppDelegate.m */; };
 		9A212403159C1FD0009C3165 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A212402159C1FD0009C3165 /* ItemsViewController.m */; };
 		9A212409159D7D69009C3165 /* BNRItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A212408159D7D69009C3165 /* BNRItemStore.m */; };
+		9A7ABE2D15A2AF0B0026C053 /* REMItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7ABE2C15A2AF0B0026C053 /* REMItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,10 +31,10 @@
 		9A1E20E1159AD56000802C13 /* HomepwnerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomepwnerAppDelegate.m; sourceTree = "<group>"; };
 		9A212401159C1FD0009C3165 /* ItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsViewController.h; sourceTree = "<group>"; };
 		9A212402159C1FD0009C3165 /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
-		9A212405159D7C55009C3165 /* BNRItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BNRItem.h; sourceTree = "<group>"; };
-		9A212406159D7C55009C3165 /* BNRItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
 		9A212407159D7D69009C3165 /* BNRItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemStore.h; sourceTree = "<group>"; };
 		9A212408159D7D69009C3165 /* BNRItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemStore.m; sourceTree = "<group>"; };
+		9A7ABE2B15A2AF0B0026C053 /* REMItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMItem.h; sourceTree = "<group>"; };
+		9A7ABE2C15A2AF0B0026C053 /* REMItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +83,8 @@
 			children = (
 				9A1E20E0159AD56000802C13 /* HomepwnerAppDelegate.h */,
 				9A1E20E1159AD56000802C13 /* HomepwnerAppDelegate.m */,
-				9A212405159D7C55009C3165 /* BNRItem.h */,
-				9A212406159D7C55009C3165 /* BNRItem.m */,
+				9A7ABE2B15A2AF0B0026C053 /* REMItem.h */,
+				9A7ABE2C15A2AF0B0026C053 /* REMItem.m */,
 				9A212407159D7D69009C3165 /* BNRItemStore.h */,
 				9A212408159D7D69009C3165 /* BNRItemStore.m */,
 				9A1E20D8159AD56000802C13 /* Supporting Files */,
@@ -170,6 +171,7 @@
 				9A1E20E2159AD56000802C13 /* HomepwnerAppDelegate.m in Sources */,
 				9A212403159C1FD0009C3165 /* ItemsViewController.m in Sources */,
 				9A212409159D7D69009C3165 /* BNRItemStore.m in Sources */,
+				9A7ABE2D15A2AF0B0026C053 /* REMItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +211,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -238,7 +241,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Homepwner/Homepwner-Prefix.pch";
 				INFOPLIST_FILE = "Homepwner/Homepwner-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -249,7 +254,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Homepwner/Homepwner-Prefix.pch";
 				INFOPLIST_FILE = "Homepwner/Homepwner-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -264,7 +271,7 @@
 				9A1E20E4159AD56000802C13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		9A1E20E5159AD56000802C13 /* Build configuration list for PBXNativeTarget "Homepwner" */ = {
 			isa = XCConfigurationList;
@@ -273,7 +280,7 @@
 				9A1E20E7159AD56000802C13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

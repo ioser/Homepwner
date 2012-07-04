@@ -2,12 +2,12 @@
 //  BNRItemStore.m
 //  Homepwner
 //
-//  Created by Sara Duckler on 6/28/12.
+//  Created by Richard Millet on 6/28/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "BNRItemStore.h"
-#import "BNRItem.h"
+#import "REMItem.h"
 
 @implementation BNRItemStore
 
@@ -26,9 +26,9 @@
 	return allItems;
 }
 
-- (BNRItem *)createItem
+- (REMItem *)createItem
 {
-	BNRItem *result = [BNRItem randomItem];
+	REMItem *result = [REMItem randomItem];
 	
 	[allItems addObject:result];
 	
