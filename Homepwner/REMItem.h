@@ -2,7 +2,7 @@
 //  BNRItem.h
 //  RandomPossessions
 //
-//  Created by Richard Millet on 4/17/12.
+//  Created by Richard Millet on 7/6/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
