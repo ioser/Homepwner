@@ -37,7 +37,7 @@
 
 + (BNRItemStore *)sharedStore
 {
-	static BNRItemStore *sharedStore = nil;
+	static BNRItemStore *sharedStore = nil; // This line is executed only once per launch of the application
 	if (!sharedStore) {
 		sharedStore = [[super allocWithZone:nil] init];
 	}
