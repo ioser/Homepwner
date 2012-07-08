@@ -11,6 +11,8 @@
 #import "BNRItemStore.h"
 #import "REMItem.h"
 
+#define NUM_OF_SECTIONS 2
+
 @implementation ItemsViewController
 
 - (id)init
@@ -33,11 +35,20 @@
 // Methods for UITableViewDataSource
 //
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return NUM_OF_SECTIONS;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	NSInteger result = -1;
-	
-	result = [[[BNRItemStore sharedStore] allItems] count];
+    
+    if (section == 0) {
+        result = [[[BNRItemStore sharedStore] allItems] count];
+    } else if (section == 1) {
+        result = [[[BNRItemStore sharedStore] allItems] count];
+    }
 	
 	return result;
 }
