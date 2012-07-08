@@ -45,6 +45,60 @@
 	return sharedStore;
 }
 
+- (NSInteger)numOfItemsWithValueGreaterThan:(NSInteger)max
+{
+    int result = 0;
+    
+    int total = [allItems count];
+    for (int i = 0; i < total; i++) {
+        REMItem *tmp = [allItems objectAtIndex:i];
+        if (tmp.valueInDollars > max) {
+            result++;
+        }
+    }
+    
+    return result;
+}
+
+- (REMItem *)itemWithValueGreaterThan:(NSInteger)max atIndex:(int)index
+{
+    REMItem * result = nil;
+    int hits = -1;
+    
+    int total = [allItems count];
+    for (int i = 0; i < total && hits != index; i++) {
+        REMItem *tmp = [allItems objectAtIndex:i];
+        if (tmp.valueInDollars > max) {
+            hits++;
+        }
+        if (hits == index) {
+            result = tmp;
+        }
+    }
+        
+    return result;
+}
+
+- (REMItem *)itemWithValueLessThanOrEqual:(NSInteger)max atIndex:(int)index
+{
+    REMItem * result = nil;
+    int hits = -1;
+    
+    int total = [allItems count];
+    for (int i = 0; i < total && hits != index; i++) {
+        REMItem *tmp = [allItems objectAtIndex:i];
+        if (tmp.valueInDollars <= max) {
+            hits++;
+        }
+        if (hits == index) {
+            result = tmp;
+        }
+    }
+    
+    return result;
+}
+
+
 // Override to protect our goal of making a singleton
 
 + (id)allocWithZone:(NSZone *)zone

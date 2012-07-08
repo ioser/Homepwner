@@ -9,16 +9,21 @@
 #import <Foundation/Foundation.h>
 
 // Forware declare a BNRItem
-@class BNRItem;
+@class REMItem;
 
 @interface BNRItemStore : NSObject
 {
 	NSMutableArray *allItems;
+    
 }
 
 + (BNRItemStore *)sharedStore;
 
 - (NSArray *)allItems;
-- (BNRItem *)createItem;
+- (REMItem *)createItem;
+
+- (NSInteger)numOfItemsWithValueGreaterThan:(NSInteger)max;
+- (REMItem *)itemWithValueGreaterThan:(NSInteger)max atIndex:(int)index;
+- (REMItem *)itemWithValueLessThanOrEqual:(NSInteger)max atIndex:(int)index;
 
 @end
