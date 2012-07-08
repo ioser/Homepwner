@@ -55,8 +55,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	// Create an instance of UITableViewCell with default appearance
-	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+    // Before creating a new cell instance, check for a reusable one
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+    
+    if (!cell) {
+        // Create an instance of UITableViewCell with default appearance
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  
+                                      reuseIdentifier:@"UITableViewCell"];
+    }
 	
 	// Set the text on the cell with the description of the item
 	// that is at the nth index of the items, where n = row this cell
