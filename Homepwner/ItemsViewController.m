@@ -11,7 +11,7 @@
 #import "BNRItemStore.h"
 #import "REMItem.h"
 
-#define NUM_OF_SECTIONS 2
+#define NUM_OF_SECTIONS 1
 
 @implementation ItemsViewController
 
@@ -44,11 +44,7 @@
 {
 	NSInteger result = -1;
     
-    if (section == 0) {
-        result = [[[BNRItemStore sharedStore] allItems] count];
-    } else if (section == 1) {
-        result = [[[BNRItemStore sharedStore] allItems] count];
-    }
+    result = [[[BNRItemStore sharedStore] allItems] count];
 	
 	return result;
 }
