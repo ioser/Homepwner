@@ -53,6 +53,9 @@
 	REMItem *p = [[[BNRItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
 	
 	[cell.textLabel setText:[p description]];
+    
+    NSLog(@"Setting cell value for row %d and section %d",
+          [indexPath row], [indexPath section]);
 	
 	return cell;
 }
