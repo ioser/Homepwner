@@ -15,6 +15,11 @@
 
 @implementation ItemsViewController
 
+- (void)loadView
+{
+    [super loadView];
+}
+
 - (id)init
 {
 	self = [super initWithStyle:UITableViewStyleGrouped];
@@ -23,12 +28,51 @@
 			[[BNRItemStore sharedStore] createItem];
 		}
 	}
+        
 	return self;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
 	return [self init];
+}
+
+- (UIView *)headerView
+{
+    // headerView will be initialized to nil at startup time
+    
+    if (!headerView) {
+        NSBundle *nsBundle = [NSBundle mainBundle];
+        [nsBundle loadNibNamed:@"HeaderView" owner:self options:nil];
+        // sets "headerView" member on nib load
+    }
+        
+    return headerView;
+}
+
+- (IBAction)toggleEditingMode:(id)sender
+{
+    if ([self isEditing]) {
+        // Change the text of the button to inform the user of editing mode
+        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+        [self setEditing:NO animated:YES];
+    } else {
+        [sender setTitle:@"Done" forState:UIControlStateNormal];
+        [self setEditing:YES animated:YES];
+    }
+}
+
+//
+// Methods for the UITableViewDelegate
+//
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [self headerView];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return [[self headerView] bounds].size.height;
 }
 
 //
