@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 // Forware declare a BNRItem
-@class BNRItem;
+@class REMItem;
 
 @interface BNRItemStore : NSObject
 {
@@ -19,6 +19,6 @@
 + (BNRItemStore *)sharedStore;
 
 - (NSArray *)allItems;
-- (BNRItem *)createItem;
+- (REMItem *)createItem;
 
 @end

@@ -62,6 +62,31 @@
     }
 }
 
+/*
+ * The UITableView's row count and the datasource's row count must be equal.  Also, it
+ * seems that they must also be in synch?
+ */
+- (IBAction)addNewItem:(id)sender
+{
+    // Create a new item
+    REMItem *newItem = [[BNRItemStore sharedStore] createItem];
+    
+    // Determine its location in the store -it should be at the end
+    int lastRow = [[[BNRItemStore sharedStore] allItems] indexOfObject:newItem];
+    
+    int testLastRow = [[[BNRItemStore sharedStore] allItems] count] - 1;
+    if (testLastRow != lastRow) {
+        NSLog(@"New item was not inserted at the end. Insert at %d and end is %d",
+              lastRow, testLastRow);
+    }
+    
+    // Make a new index path for inserting a new row
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    
+    // Insert the new row into the table at the end
+    [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+}
+
 //
 // Methods for the UITableViewDelegate
 //
