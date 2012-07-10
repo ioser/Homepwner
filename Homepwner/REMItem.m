@@ -65,7 +65,7 @@
 }
 
 - (void)dealloc{
-	NSLog(@"Destroying a BNRItem %@", self);
+	NSLog(@"Destroying a REMItem %@", self);
 }
 
 - (id)initWithItemName:(NSString *)theItemName

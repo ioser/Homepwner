@@ -35,6 +35,11 @@
 	return result;
 }
 
+- (void)removeItem:(REMItem *)item
+{
+    [allItems removeObjectIdenticalTo:item];
+}
+
 + (BNRItemStore *)sharedStore
 {
 	static BNRItemStore *sharedStore = nil; // This line is executed only once per launch of the application

@@ -24,9 +24,9 @@
 {
 	self = [super initWithStyle:UITableViewStyleGrouped];
 	if (self) {
-		for (int i = 0; i < 5; i++) {
-			[[BNRItemStore sharedStore] createItem];
-		}
+//		for (int i = 0; i < 5; i++) {
+//			[[BNRItemStore sharedStore] createItem];
+//		}
 	}
         
 	return self;
@@ -90,6 +90,7 @@
 //
 // Methods for the UITableViewDelegate
 //
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     return [self headerView];
@@ -103,6 +104,21 @@
 //
 // Methods for UITableViewDataSource
 //
+
+- (void)    tableView:(UITableView *)tableView
+   commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+    forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    REMItem *item = [[[BNRItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Remove the item from the data store
+        [[BNRItemStore sharedStore] removeItem:item];
+        
+        // Remove the row from the table view
+        NSArray *rowsToDelete = [NSArray arrayWithObject:indexPath];
+        [tableView deleteRowsAtIndexPaths:rowsToDelete withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

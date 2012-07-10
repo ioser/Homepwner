@@ -20,5 +20,6 @@
 
 - (NSArray *)allItems;
 - (REMItem *)createItem;
+- (void)removeItem:(REMItem *)item;
 
 @end
