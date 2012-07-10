@@ -3,7 +3,7 @@
 //  Homepwner
 //
 //  Created by Richard Millet on 6/27/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Millet Designs. All rights reserved.
 //
 // 
 
