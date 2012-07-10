@@ -51,7 +51,6 @@
 }
 
 // Override to protect our goal of making a singleton
-
 + (id)allocWithZone:(NSZone *)zone
 {
 	return [self sharedStore];
