@@ -105,6 +105,13 @@
 // Methods for UITableViewDataSource
 //
 
+- (void)    tableView:(UITableView *)tableView 
+   moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath 
+          toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    [[BNRItemStore sharedStore] moveItemAtIndex:[sourceIndexPath row] toIndex:[destinationIndexPath row]];
+}
+
 - (void)    tableView:(UITableView *)tableView
    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     forRowAtIndexPath:(NSIndexPath *)indexPath

@@ -35,6 +35,16 @@
 	return result;
 }
 
+- (void)moveItemAtIndex:(int)from toIndex:(int)to
+{
+    // An optimization check first
+    if (from != to) {
+        REMItem *tmp = [allItems objectAtIndex:from];
+        [allItems removeObjectAtIndex:from];
+        [allItems insertObject:tmp atIndex:to];
+    }
+}
+
 - (void)removeItem:(REMItem *)item
 {
     [allItems removeObjectIdenticalTo:item];

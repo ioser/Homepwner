@@ -21,5 +21,6 @@
 - (NSArray *)allItems;
 - (REMItem *)createItem;
 - (void)removeItem:(REMItem *)item;
+- (void)moveItemAtIndex:(int)from toIndex:(int)to;
 
 @end
