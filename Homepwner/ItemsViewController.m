@@ -12,6 +12,7 @@
 #import "REMItem.h"
 
 #define NUM_OF_SECTIONS 1
+#define STR_DELETE_CONFIRMATION_LABEL @"Remove"
 
 @implementation ItemsViewController
 
@@ -99,6 +100,16 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return [[self headerView] bounds].size.height;
+}
+
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Do nothing.
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return STR_DELETE_CONFIRMATION_LABEL;
 }
 
 //
