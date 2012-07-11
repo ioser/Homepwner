@@ -113,7 +113,8 @@
 {
     NSIndexPath *result = proposedDestinationIndexPath;
     
-    if ([self isLastRow:tableView atIndexPath:sourceIndexPath]) {
+    if ([self isLastRow:tableView atIndexPath:sourceIndexPath] ||
+        [self isLastRow:tableView atIndexPath:proposedDestinationIndexPath]) {
         result = sourceIndexPath;
     }
     
