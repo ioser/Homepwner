@@ -13,6 +13,7 @@
 
 #define NUM_OF_SECTIONS 1
 #define STR_DELETE_CONFIRMATION_LABEL @"Remove"
+#define STR_NO_MORE_ITEMS @"No more items"
 
 @implementation ItemsViewController
 
@@ -88,9 +89,47 @@
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
 }
 
+- (BOOL) isLastRow:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath
+{
+    BOOL result = NO;
+    
+    int row = [indexPath row];
+    int section = [indexPath section];
+
+    if (row >= [tableView numberOfRowsInSection:section] - 1) {
+        result = YES;
+    }
+    
+    return result;
+}
+
 //
 // Methods for the UITableViewDelegate
 //
+
+- (NSIndexPath *)               tableView:(UITableView *)tableView
+ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+                      toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    NSIndexPath *result = proposedDestinationIndexPath;
+    
+    if ([self isLastRow:tableView atIndexPath:sourceIndexPath]) {
+        result = sourceIndexPath;
+    }
+    
+    return result;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCellEditingStyle result = UITableViewCellEditingStyleDelete;
+    
+    if ([self isLastRow:tableView atIndexPath:indexPath]) {
+        result = UITableViewCellEditingStyleNone;
+    }
+    
+    return result;
+}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -147,7 +186,7 @@
 {
 	NSInteger result = -1;
     
-    result = [[[BNRItemStore sharedStore] allItems] count];
+    result = [[[BNRItemStore sharedStore] allItems] count] + 1;
 	
 	return result;
 }
@@ -163,15 +202,21 @@
                                       reuseIdentifier:@"UITableViewCell"];
     }
 	
-	// Set the text on the cell with the description of the item
-	// that is at the nth index of the items, where n = row this cell
-	// will appear in on the table view
-	REMItem *p = [[[BNRItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
+    int row = [indexPath row];
+    NSInteger section = [indexPath section];
+    NSString *description = STR_NO_MORE_ITEMS;
+    
+    if ([self isLastRow:tableView atIndexPath:indexPath] == NO) {
+        // Set the text on the cell with the description of the item
+        // that is at the nth index of the items, where n = row this cell
+        // will appear in on the table view
+        description = [[[[BNRItemStore sharedStore] allItems] objectAtIndex:[indexPath row]] description];
+    }
 	
-	[cell.textLabel setText:[p description]];
+	[cell.textLabel setText:description];
     
     NSLog(@"Setting cell value for row %d and section %d",
-          [indexPath row], [indexPath section]);
+          row, section);
 	
 	return cell;
 }
