@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class REMItem;
+
 @interface DetailViewController : UIViewController
 {
     __weak IBOutlet UITextField *nameField;
@@ -15,4 +17,5 @@
     __weak IBOutlet UITextField *valueField;
     __weak IBOutlet UILabel *dateLabel;
 }
+@property (nonatomic, strong) REMItem *item;
 @end

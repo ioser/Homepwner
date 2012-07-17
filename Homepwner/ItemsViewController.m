@@ -107,6 +107,18 @@
 // Methods for the UITableViewDelegate
 //
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger row = [indexPath row];
+    DetailViewController *detailViewControler = [[DetailViewController alloc] init];
+    
+    // Set the item to be viewed
+    NSArray *items = [[BNRItemStore sharedStore] allItems];
+    REMItem *itemToDisplay = [items objectAtIndex:row];
+    [detailViewControler setItem:itemToDisplay];
+    [[self navigationController] pushViewController:detailViewControler animated:YES];
+}
+
 - (NSIndexPath *)               tableView:(UITableView *)tableView
  targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
                       toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath

@@ -7,12 +7,15 @@
 //
 
 #import "DetailViewController.h"
+#import "REMItem.h"
 
 @interface DetailViewController ()
 
 @end
 
 @implementation DetailViewController
+
+@synthesize item;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -21,6 +24,23 @@
         // Custom initialization
     }
     return self;
+}
+
+//- (id)initWithItem:(REMItem *)remItem
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [nameField setText:item.itemName];
+    [serialField setText:item.serialNumber];
+    [valueField setText:[NSString stringWithFormat:@"%d", [item valueInDollars]]];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    // Use filtered NSDate object to set dateLabel contents
+    [dateLabel setText:[dateFormatter stringFromDate:[item dateCreated]]];
 }
 
 - (void)viewDidLoad
