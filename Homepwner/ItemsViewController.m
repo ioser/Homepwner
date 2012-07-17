@@ -89,7 +89,13 @@
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
 }
 
-- (BOOL) isLastRow:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[self tableView] reloadData];
+}
+
+- (BOOL)isLastRow:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath
 {
     BOOL result = NO;
     

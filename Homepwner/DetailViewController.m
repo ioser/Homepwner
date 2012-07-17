@@ -43,6 +43,21 @@
     [dateLabel setText:[dateFormatter stringFromDate:[item dateCreated]]];
 }
 
+/*
+ * Check to see if any of the fields in the view have changed from the values we loaded
+ * from the original item.  If they've changed, we need to update the item.
+ */
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // Clear the first responder
+    [[self view] endEditing:YES];
+    
+    item.itemName = [nameField text];
+    item.serialNumber = [serialField text];
+    item.valueInDollars = [[valueField text] intValue];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
