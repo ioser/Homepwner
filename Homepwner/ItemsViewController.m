@@ -26,10 +26,16 @@
 {
 	self = [super initWithStyle:UITableViewStyleGrouped];
 	if (self) {
-//		for (int i = 0; i < 5; i++) {
-//			[[BNRItemStore sharedStore] createItem];
-//		}
-	}
+        UINavigationItem *navigationItem = [self navigationItem];
+        [navigationItem setTitle:@"Homepwner"];
+        
+        // Create a new bar button item that will send
+        // addNewItem: to ItemsViewController
+        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                       target:self action:@selector(addNewItem:)];
+        // Now set this bar button item to be the rightmost item in the navigation item
+        [[self navigationItem] setRightBarButtonItem:barButtonItem];
+    }
         
 	return self;
 }

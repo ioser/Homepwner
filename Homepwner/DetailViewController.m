@@ -28,6 +28,15 @@
 
 //- (id)initWithItem:(REMItem *)remItem
 
+- (void)setItem:(REMItem *)theItem
+{
+    if (theItem) {
+        UINavigationItem *navigationItem = [self navigationItem];
+        [navigationItem setTitle:[theItem itemName]];
+        item = theItem;
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
