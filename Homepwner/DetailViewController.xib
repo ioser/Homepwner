@@ -210,6 +210,8 @@
 						<float key="IBUIMinimumFontSize">17</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIKeyboardType">2</int>
+							<int key="IBUIReturnKeyType">9</int>
+							<bool key="IBUIEnablesReturnKeyAutomatically">YES</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="495203008"/>
