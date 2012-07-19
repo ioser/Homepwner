@@ -35,6 +35,7 @@
                                                                                        target:self action:@selector(addNewItem:)];
         // Now set this bar button item to be the rightmost item in the navigation item
         [[self navigationItem] setRightBarButtonItem:barButtonItem];
+        [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
     }
         
 	return self;
@@ -45,30 +46,30 @@
 	return [self init];
 }
 
-- (UIView *)headerView
-{
-    // headerView will be initialized to nil at startup time
-    
-    if (!headerView) {
-        NSBundle *nsBundle = [NSBundle mainBundle];
-        [nsBundle loadNibNamed:@"HeaderView" owner:self options:nil];
-        // sets "headerView" member on nib load
-    }
-        
-    return headerView;
-}
+//- (UIView *)headerView
+//{
+//    // headerView will be initialized to nil at startup time
+//    
+//    if (!headerView) {
+//        NSBundle *nsBundle = [NSBundle mainBundle];
+//        [nsBundle loadNibNamed:@"HeaderView" owner:self options:nil];
+//        // sets "headerView" member on nib load
+//    }
+//        
+//    return headerView;
+//}
 
-- (IBAction)toggleEditingMode:(id)sender
-{
-    if ([self isEditing]) {
-        // Change the text of the button to inform the user of editing mode
-        [sender setTitle:@"Edit" forState:UIControlStateNormal];
-        [self setEditing:NO animated:YES];
-    } else {
-        [sender setTitle:@"Done" forState:UIControlStateNormal];
-        [self setEditing:YES animated:YES];
-    }
-}
+//- (IBAction)toggleEditingMode:(id)sender
+//{
+//    if ([self isEditing]) {
+//        // Change the text of the button to inform the user of editing mode
+//        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+//        [self setEditing:NO animated:YES];
+//    } else {
+//        [sender setTitle:@"Done" forState:UIControlStateNormal];
+//        [self setEditing:YES animated:YES];
+//    }
+//}
 
 /*
  * The UITableView's row count and the datasource's row count must be equal.  Also, it
@@ -156,15 +157,15 @@
     return result;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return [self headerView];
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    return [self headerView];
+//}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return [[self headerView] bounds].size.height;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return [[self headerView] bounds].size.height;
+//}
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
