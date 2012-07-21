@@ -28,6 +28,10 @@
 
 //- (id)initWithItem:(REMItem *)remItem
 
+- (IBAction)takePicture:(id)sender
+{
+}
+
 - (void)setItem:(REMItem *)theItem
 {
     if (theItem) {
@@ -80,6 +84,7 @@
     serialField = nil;
     valueField = nil;
     dateLabel = nil;
+    imageView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

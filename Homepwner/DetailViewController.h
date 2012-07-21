@@ -16,6 +16,11 @@
     __weak IBOutlet UITextField *serialField;
     __weak IBOutlet UITextField *valueField;
     __weak IBOutlet UILabel *dateLabel;
+    __weak IBOutlet UIImageView *imageView;
 }
+
 @property (nonatomic, strong) REMItem *item;
+
+- (IBAction)takePicture:(id)sender;
+
 @end
