@@ -30,6 +30,36 @@
 
 - (IBAction)takePicture:(id)sender
 {
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    UIImagePickerControllerSourceType sourceType;
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        sourceType = UIImagePickerControllerSourceTypeCamera;
+    } else {
+        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    
+    [imagePickerController setSourceType:sourceType];
+    [imagePickerController setDelegate:self];
+    
+    // Now place the image picker view on the screen modally
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+/*
+ * This method is a UIImagePickerControllerDelegate method
+ *
+ */
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    // Get this picked image
+    UIImage *pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    // Save the image
+    [imageView setImage:pickedImage];
+    
+    // Dismiss the image picker controller
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)setItem:(REMItem *)theItem

@@ -10,7 +10,7 @@
 
 @class REMItem;
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
     __weak IBOutlet UITextField *nameField;
     __weak IBOutlet UITextField *serialField;
