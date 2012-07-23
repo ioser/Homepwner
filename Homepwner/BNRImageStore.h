@@ -12,7 +12,7 @@
 {
     NSMutableDictionary *dictionary;
 }
-+ (BNRImageStore *) sharedStore;
++ (BNRImageStore *) sharedStore; // defined as a singleton in the .m file
 
 - (void)setImage:(UIImage *)image forKey:(NSString *)key;
 - (UIImage *)imageForKey:(NSString *)key;

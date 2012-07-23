@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "BNRImageStore.h"
 #import "REMItem.h"
 
 @interface DetailViewController ()
@@ -55,8 +56,9 @@
     // Get this picked image
     UIImage *pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    // Save the image
-    [imageView setImage:pickedImage];
+    // Save the image using the serial number for as the key
+//  [imageView setImage:pickedImage];
+    [[BNRImageStore sharedStore] setImage:pickedImage forKey:[serialField text]];
     
     // Dismiss the image picker controller
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -74,6 +76,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [nameField setText:item.itemName];
     [serialField setText:item.serialNumber];
     [valueField setText:[NSString stringWithFormat:@"%d", [item valueInDollars]]];
@@ -81,9 +84,13 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-    
     // Use filtered NSDate object to set dateLabel contents
     [dateLabel setText:[dateFormatter stringFromDate:[item dateCreated]]];
+    
+    // Get the item's image if one exists
+    NSString *imageKey = [serialField text];
+    UIImage *image = [[BNRImageStore sharedStore] imageForKey:imageKey];
+    [imageView setImage:image];
 }
 
 /*
