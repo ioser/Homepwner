@@ -59,4 +59,8 @@
 
 @property (nonatomic, readonly, strong) NSDate *dateCreated;
 //- (NSDate *) dateCreated;
+
+// Property used to keep track of an item's image in the shared image store
+@property (nonatomic, copy) NSString *imageKey;
+
 @end

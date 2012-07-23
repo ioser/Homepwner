@@ -47,6 +47,17 @@
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
+- (NSString *)createImageKey
+{
+    NSString *result = nil;
+    
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    CFStringRef stringRef = CFUUIDCreateString(kCFAllocatorDefault, uuid);
+    result = (__bridge NSString *)stringRef;
+
+    return result;
+}
+
 /*
  * This method is a UIImagePickerControllerDelegate method
  *
@@ -57,8 +68,9 @@
     UIImage *pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     
     // Save the image using the serial number for as the key
-//  [imageView setImage:pickedImage];
-    [[BNRImageStore sharedStore] setImage:pickedImage forKey:[serialField text]];
+    NSString *imageKey = [self createImageKey];
+    [[self item] setImageKey:imageKey];
+    [[BNRImageStore sharedStore] setImage:pickedImage forKey:imageKey];
     
     // Dismiss the image picker controller
     [self dismissViewControllerAnimated:YES completion:nil];

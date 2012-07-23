@@ -10,6 +10,9 @@
 
 @implementation REMItem
 
+// Used as the key to the item's image in the shared image store
+@synthesize imageKey;
+
 + (id)randomItem
 {
     // Create an array of three adjectives
