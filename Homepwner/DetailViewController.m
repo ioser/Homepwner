@@ -47,6 +47,12 @@
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
+// A tap should dismiss the keyboard
+- (IBAction)backgroundTapped:(id)sender
+{
+    [[self view] endEditing:YES];
+}
+
 // Create a UUID string to use as a key for the image key store
 - (NSString *)createImageKey
 {

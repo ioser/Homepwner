@@ -10,7 +10,7 @@
 
 @class REMItem;
 
-@interface DetailViewController : UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface DetailViewController : UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextFieldDelegate>
 {
     __weak IBOutlet UITextField *nameField;
     __weak IBOutlet UITextField *serialField;
@@ -22,5 +22,6 @@
 @property (nonatomic, strong) REMItem *item;
 
 - (IBAction)takePicture:(id)sender;
+- (IBAction)backgroundTapped:(id)sender;
 
 @end
