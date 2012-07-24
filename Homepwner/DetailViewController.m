@@ -47,13 +47,18 @@
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
+// Create a UUID string to use as a key for the image key store
 - (NSString *)createImageKey
 {
     NSString *result = nil;
     
     CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
     CFStringRef stringRef = CFUUIDCreateString(kCFAllocatorDefault, uuid);
-    result = (__bridge NSString *)stringRef;
+    result = [NSString stringWithString:(__bridge NSString *)stringRef]; // Use "toll free bridge" casting mechanism and a copy
+    
+    // Now release the CF objects
+    CFRelease(stringRef);
+    CFRelease(uuid);
 
     return result;
 }
@@ -66,11 +71,22 @@
 {
     // Get this picked image
     UIImage *pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    // Save the image using the serial number for as the key
-    NSString *imageKey = [self createImageKey];
-    [[self item] setImageKey:imageKey];
-    [[BNRImageStore sharedStore] setImage:pickedImage forKey:imageKey];
+
+    // If the user picked a new image and there is currently an existing image, delete the current one from the image store.
+    NSString *currentImageKey = [item imageKey];
+    if (currentImageKey && pickedImage) { // Delete the current image for the item if one exists
+        UIImage *currentImage = [[BNRImageStore sharedStore] imageForKey:currentImageKey];
+        if (currentImage) {
+            [[BNRImageStore sharedStore] deleteImageForKey:currentImageKey];
+        }
+    }
+
+    // If there is a new image, save it using a generated UUID string as the key
+    if (pickedImage) {
+        NSString *imageKey = [self createImageKey];
+        [[self item] setImageKey:imageKey];
+        [[BNRImageStore sharedStore] setImage:pickedImage forKey:imageKey];
+    }
     
     // Dismiss the image picker controller
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -99,10 +115,14 @@
     // Use filtered NSDate object to set dateLabel contents
     [dateLabel setText:[dateFormatter stringFromDate:[item dateCreated]]];
     
-    // Get the item's image if one exists
-    NSString *imageKey = [serialField text];
-    UIImage *image = [[BNRImageStore sharedStore] imageForKey:imageKey];
-    [imageView setImage:image];
+    // Get the item's image if one exists and set it to the item's image view member instance
+    NSString *imageKey = [item imageKey];
+    if (imageKey) {
+        UIImage *image = [[BNRImageStore sharedStore] imageForKey:imageKey];
+        [imageView setImage:image];
+    } else {
+        [imageView setImage:nil];
+    }
 }
 
 /*
