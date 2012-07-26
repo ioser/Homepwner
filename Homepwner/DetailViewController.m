@@ -47,7 +47,19 @@
     [imagePickerController setDelegate:self];
     
     // Now place the image picker view on the screen modally
-    [self presentViewController:imagePickerController animated:YES completion:nil];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        // Create a new popover controller to display the image picker
+        imagePickerPopover = [[UIPopoverController alloc] initWithContentViewController:imagePickerController];
+        [imagePickerPopover setDelegate:self];
+        
+        // Finally present the view controller
+        [imagePickerPopover presentPopoverFromBarButtonItem:sender 
+                                   permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                                   animated:YES];
+        
+    } else {
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+    }
 }
 
 - (IBAction)deleteImage:(id)sender
