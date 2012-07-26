@@ -147,6 +147,7 @@
     if (imageKey) {
         UIImage *image = [[BNRImageStore sharedStore] imageForKey:imageKey];
         [imageView setImage:image];
+		[trashButtonItem setEnabled:YES];
     } else {
         [imageView setImage:nil];
     }
