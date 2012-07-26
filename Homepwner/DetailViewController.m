@@ -171,8 +171,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIColor *backgroundColor = nil;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        backgroundColor = [UIColor colorWithRed:0.875 green:0.88 blue:0.91 alpha:1];
+    } else {
+        backgroundColor = [UIColor groupTableViewBackgroundColor];
+    }
     // Do any additional setup after loading the view from its nib.
-    [[self view] setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    [[self view] setBackgroundColor:backgroundColor];
 }
 
 - (void)viewDidUnload
@@ -191,7 +198,13 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    BOOL result = (interfaceOrientation == UIInterfaceOrientationPortrait); // Keep in portrait by default
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        result = YES;
+    }
+    
+    return result;
 }
 
 //

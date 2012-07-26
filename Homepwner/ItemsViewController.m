@@ -102,6 +102,17 @@
     [[self tableView] reloadData];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    BOOL result = (interfaceOrientation == UIInterfaceOrientationPortrait); // Keep in portrait by default
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        result = YES;
+    }
+    
+    return result;
+}
+
 - (BOOL)isLastRow:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath
 {
     BOOL result = NO;
