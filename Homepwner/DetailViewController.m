@@ -34,6 +34,9 @@
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     UIImagePickerControllerSourceType sourceType;
     
+    // Allow the user to edit the image
+    [imagePickerController setAllowsEditing:YES];
+    
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         sourceType = UIImagePickerControllerSourceTypeCamera;
     } else {
@@ -46,6 +49,17 @@
     // Now place the image picker view on the screen modally
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
+
+- (IBAction)deleteImage:(id)sender
+{
+    NSString *currentImageKey = [item imageKey];
+    if (currentImageKey) {
+        [[BNRImageStore sharedStore] deleteImageForKey:currentImageKey];
+        [imageView setImage:nil];
+        [trashButtonItem setEnabled:NO];
+    }
+}
+
 
 // A tap should dismiss the keyboard
 - (IBAction)backgroundTapped:(id)sender
@@ -77,6 +91,10 @@
 {
     // Get this picked image
     UIImage *pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    if (editedImage) {
+        pickedImage = editedImage;
+    }
 
     // If the user picked a new image and there is currently an existing image, delete the current one from the image store.
     NSString *currentImageKey = [item imageKey];
@@ -92,6 +110,9 @@
         NSString *imageKey = [self createImageKey];
         [[self item] setImageKey:imageKey];
         [[BNRImageStore sharedStore] setImage:pickedImage forKey:imageKey];
+        
+        // Enable the delete image bar button item since we have an picture/image now
+        [trashButtonItem setEnabled:YES];
     }
     
     // Dismiss the image picker controller
@@ -160,6 +181,8 @@
     valueField = nil;
     dateLabel = nil;
     imageView = nil;
+    bottonToolbar = nil;
+    trashButtonItem = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
