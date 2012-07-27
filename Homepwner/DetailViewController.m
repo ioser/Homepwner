@@ -23,7 +23,32 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        // We're not going to allow this call.
+//        @throw [NSException exceptionWithName:@"Wrong initializer called." 
+//                                       reason:@"Use initForNewItem instead." 
+//                                     userInfo:nil];
     }
+    return self;
+}
+
+- (id)initForNewItem:(BOOL)isNew
+{
+    self = [super initWithNibName:@"DetailViewController" bundle:nil];
+    if (self) {
+        if (isNew == YES) {
+            // Create "done" and "cancel" bar button items
+            UIBarButtonItem *doneButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStyleDone 
+                                                                                            target:self 
+                                                                                            action:@selector(save:)];
+            [[self navigationItem] setRightBarButtonItem:doneButtonItem];
+            
+            UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
+                                                                                              target:self 
+                                                                                              action:@selector(cancel:)];
+            [[self navigationItem] setLeftBarButtonItem:cancelButtonItem];
+        }
+    }
+    
     return self;
 }
 
@@ -37,34 +62,38 @@
 
 - (IBAction)takePicture:(id)sender
 {
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    UIImagePickerControllerSourceType sourceType;
-    
-    // Allow the user to edit the image
-    [imagePickerController setAllowsEditing:YES];
-    
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        sourceType = UIImagePickerControllerSourceTypeCamera;
-    } else {
-        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
-    
-    [imagePickerController setSourceType:sourceType];
-    [imagePickerController setDelegate:self];
-    
-    // Now place the image picker view on the screen modally
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        // Create a new popover controller to display the image picker
-        imagePickerPopover = [[UIPopoverController alloc] initWithContentViewController:imagePickerController];
-        [imagePickerPopover setDelegate:self];
+    if ([imagePickerPopover isPopoverVisible] == NO) {
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        UIImagePickerControllerSourceType sourceType;
         
-        // Finally present the view controller
-        [imagePickerPopover presentPopoverFromBarButtonItem:sender 
-                                   permittedArrowDirections:UIPopoverArrowDirectionAny 
-                                                   animated:YES];
+        // Allow the user to edit the image
+        [imagePickerController setAllowsEditing:YES];
         
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            sourceType = UIImagePickerControllerSourceTypeCamera;
+        } else {
+            sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        }
+        
+        [imagePickerController setSourceType:sourceType];
+        [imagePickerController setDelegate:self];
+        
+        // Now place the image picker view on the screen modally
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            // Create a new popover controller to display the image picker
+            imagePickerPopover = [[UIPopoverController alloc] initWithContentViewController:imagePickerController];
+            [imagePickerPopover setDelegate:self];
+            
+            // Finally present the view controller
+            [imagePickerPopover presentPopoverFromBarButtonItem:sender 
+                                       permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                                       animated:YES];
+            
+        } else {
+            [self presentViewController:imagePickerController animated:YES completion:nil];
+        }
     } else {
-        [self presentViewController:imagePickerController animated:YES completion:nil];
+        NSLog(@"Pop over controller's picker is already visible");
     }
 }
 

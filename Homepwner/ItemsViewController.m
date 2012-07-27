@@ -131,16 +131,35 @@
 // Methods for the UITableViewDelegate
 //
 
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger row = [indexPath row];
-    DetailViewController *detailViewControler = [[DetailViewController alloc] init];
-    
-    // Set the item to be viewed
-    NSArray *items = [[BNRItemStore sharedStore] allItems];
-    REMItem *itemToDisplay = [items objectAtIndex:row];
-    [detailViewControler setItem:itemToDisplay];
-    [[self navigationController] pushViewController:detailViewControler animated:YES];
+    // If it is the last row, just gray out the message and make it so it can't be selected.
+    if ([self isLastRow:tableView atIndexPath:indexPath] == YES) {
+        [[cell textLabel] setTextColor:[UIColor grayColor]];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSIndexPath *result = indexPath;
+    if ([self isLastRow:tableView atIndexPath:indexPath] == YES) {
+        result = nil;
+    }
+    return result;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{    
+    if ([self isLastRow:tableView atIndexPath:indexPath] == NO) {
+        // Set the item to be viewed
+        NSInteger row = [indexPath row];
+        NSArray *items = [[BNRItemStore sharedStore] allItems];
+        REMItem *itemToDisplay = [items objectAtIndex:row];
+        DetailViewController *detailViewControler = [[DetailViewController alloc] init];
+        [detailViewControler setItem:itemToDisplay];
+        [[self navigationController] pushViewController:detailViewControler animated:YES];
+    }
 }
 
 - (NSIndexPath *)               tableView:(UITableView *)tableView
