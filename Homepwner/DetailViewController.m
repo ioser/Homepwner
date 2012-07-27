@@ -29,6 +29,12 @@
 
 //- (id)initWithItem:(REMItem *)remItem
 
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    NSLog(@"User dismissed popover controller.");
+    imagePickerPopover = nil; // Essentially destroy the pop over picker controller by setting to nil
+}
+
 - (IBAction)takePicture:(id)sender
 {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
@@ -122,13 +128,20 @@
         NSString *imageKey = [self createImageKey];
         [[self item] setImageKey:imageKey];
         [[BNRImageStore sharedStore] setImage:pickedImage forKey:imageKey];
+        [imageView setImage:pickedImage]; // set the image in the view
         
         // Enable the delete image bar button item since we have an picture/image now
         [trashButtonItem setEnabled:YES];
     }
     
-    // Dismiss the image picker controller
-    [self dismissViewControllerAnimated:YES completion:nil];
+    // Dismiss the image picker controller if it is an iPhone/iPod
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        // otherwise, dismiss the pop over controller
+        [imagePickerPopover dismissPopoverAnimated:YES];
+        imagePickerPopover = nil;
+    }
 }
 
 - (void)setItem:(REMItem *)theItem
