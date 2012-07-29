@@ -107,6 +107,7 @@
     // Now create a navigation controller
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
     [navigationController setModalPresentationStyle:UIModalPresentationFormSheet]; // Use the form sheet style
+//    [navigationController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     [self presentViewController:navigationController animated:YES completion:nil];
 
     
