@@ -18,6 +18,7 @@
 @implementation DetailViewController
 
 @synthesize item;
+@synthesize dismissBlock;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,14 +59,14 @@
 
 - (void)save:(id)sender
 {
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil]; // Tell whoever push us up to take us down
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissBlock]; // Tell whoever push us up to take us down
 }
 
 // The use hit cancel, so we need to throw away the newly added item
 - (void)cancel:(id)sender
 {
     [[BNRItemStore sharedStore] removeItem:item];
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil]; // Tell whoever push us up to take us down
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:dismissBlock]; // Tell whoever push us up to take us down
 }
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController

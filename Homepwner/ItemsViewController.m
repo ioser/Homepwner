@@ -100,9 +100,13 @@
     // Create a detail view controller so we can edit the new item
     DetailViewController *detailViewController = [[DetailViewController alloc] initForNewItem:YES];
     [detailViewController setItem:newItem];
+    [detailViewController setDismissBlock:^{
+        [[self tableView] reloadData];
+    }];
     
     // Now create a navigation controller
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+    [navigationController setModalPresentationStyle:UIModalPresentationFormSheet]; // Use the form sheet style
     [self presentViewController:navigationController animated:YES completion:nil];
 
     

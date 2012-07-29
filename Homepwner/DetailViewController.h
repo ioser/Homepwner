@@ -27,6 +27,7 @@
 - (id)initForNewItem:(BOOL)isNew;
 
 @property (nonatomic, strong) REMItem *item;
+@property (nonatomic, copy) void (^dismissBlock)(void);
 
 - (IBAction)takePicture:(id)sender;
 - (IBAction)backgroundTapped:(id)sender;
