@@ -80,6 +80,7 @@
     // Create a new item
     REMItem *newItem = [[BNRItemStore sharedStore] createItem];
     
+    /*
     // Determine its location in the store -it should be at the end
     int lastRow = [[[BNRItemStore sharedStore] allItems] indexOfObject:newItem];
     
@@ -90,10 +91,21 @@
     }
     
     // Make a new index path for inserting a new row
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0]; // Hardcode 0 as the section since we only have one section
     
     // Insert the new row into the table at the end
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+     */
+    
+    // Create a detail view controller so we can edit the new item
+    DetailViewController *detailViewController = [[DetailViewController alloc] initForNewItem:YES];
+    [detailViewController setItem:newItem];
+    
+    // Now create a navigation controller
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
+
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -137,6 +149,8 @@
     if ([self isLastRow:tableView atIndexPath:indexPath] == YES) {
         [[cell textLabel] setTextColor:[UIColor grayColor]];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    } else {
+        [[cell textLabel] setTextColor:[UIColor blackColor]];
     }
 }
 
@@ -156,7 +170,7 @@
         NSInteger row = [indexPath row];
         NSArray *items = [[BNRItemStore sharedStore] allItems];
         REMItem *itemToDisplay = [items objectAtIndex:row];
-        DetailViewController *detailViewControler = [[DetailViewController alloc] init];
+        DetailViewController *detailViewControler = [[DetailViewController alloc] initForNewItem:NO];
         [detailViewControler setItem:itemToDisplay];
         [[self navigationController] pushViewController:detailViewControler animated:YES];
     }

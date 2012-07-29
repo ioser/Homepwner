@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import "BNRImageStore.h"
 #import "REMItem.h"
+#import "BNRItemStore.h"
 
 @interface DetailViewController ()
 
@@ -24,9 +25,9 @@
     if (self) {
         // Custom initialization
         // We're not going to allow this call.
-//        @throw [NSException exceptionWithName:@"Wrong initializer called." 
-//                                       reason:@"Use initForNewItem instead." 
-//                                     userInfo:nil];
+        @throw [NSException exceptionWithName:@"Wrong initializer called." 
+                                       reason:@"Use initForNewItem instead." 
+                                     userInfo:nil];
     }
     return self;
 }
@@ -37,9 +38,10 @@
     if (self) {
         if (isNew == YES) {
             // Create "done" and "cancel" bar button items
-            UIBarButtonItem *doneButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonItemStyleDone 
+            UIBarButtonItem *doneButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                             target:self 
                                                                                             action:@selector(save:)];
+            [doneButtonItem setTitle:@"Save"];
             [[self navigationItem] setRightBarButtonItem:doneButtonItem];
             
             UIBarButtonItem *cancelButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
@@ -53,6 +55,18 @@
 }
 
 //- (id)initWithItem:(REMItem *)remItem
+
+- (void)save:(id)sender
+{
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil]; // Tell whoever push us up to take us down
+}
+
+// The use hit cancel, so we need to throw away the newly added item
+- (void)cancel:(id)sender
+{
+    [[BNRItemStore sharedStore] removeItem:item];
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil]; // Tell whoever push us up to take us down
+}
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
