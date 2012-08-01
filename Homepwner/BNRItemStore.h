@@ -23,4 +23,9 @@
 - (void)removeItem:(REMItem *)item;
 - (void)moveItemAtIndex:(int)from toIndex:(int)to;
 
+// Create a file system path to the place we'll archive/persist the items
+- (NSString *)itemArchivePath;
+// Save/perist the list of items
+- (BOOL)saveChanges;
+
 @end

@@ -9,6 +9,8 @@
 #import "BNRItemStore.h"
 #import "REMItem.h"
 
+#define ITEMS_ARCHIVE_NAME @"items.archive"
+
 @implementation BNRItemStore
 
 - (id)init
@@ -48,6 +50,30 @@
 - (void)removeItem:(REMItem *)item
 {
     [allItems removeObjectIdenticalTo:item];
+}
+
+// Create a file system path to the place we'll archive/persist the items
+- (NSString *)itemArchivePath
+{
+    NSString *result = nil;
+    
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    // Since we're in iOS, the first directory is the only directory
+    NSString *documentDirectory = [documentDirectories objectAtIndex:0];
+    result = [documentDirectory stringByAppendingPathComponent:ITEMS_ARCHIVE_NAME];
+    
+    return result;
+}
+
+// Save/perist the list of items
+- (BOOL)saveChanges
+{
+    BOOL result = false;
+
+    NSString *toPath = [self itemArchivePath];
+    result = [NSKeyedArchiver archiveRootObject:allItems toFile:toPath];
+    
+    return result;
 }
 
 + (BNRItemStore *)sharedStore
