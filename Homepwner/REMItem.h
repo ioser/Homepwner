@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface REMItem : NSObject
+@interface REMItem : NSObject<NSCoding>
 {
 //    NSString *itemName;
 //    NSString *serialNumber;

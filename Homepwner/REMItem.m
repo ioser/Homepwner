@@ -150,4 +150,31 @@
 	//Intentionally left blank.
 }
 
+// NSCoding protocol methods
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:itemName forKey:@"itemName"];
+    [aCoder encodeObject:serialNumber forKey:@"serialNumber"];
+    [aCoder encodeObject:dateCreated forKey:@"dataCreated"];
+    [aCoder encodeObject:imageKey forKey:@"imageKey"];
+    // encode an integer
+    [aCoder encodeInt:valueInDollars forKey:@"valueInDollars"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    
+    if (self) {
+        [self setItemName:[aDecoder decodeObjectForKey:@"itemName"]];
+        [self setSerialNumber:[aDecoder decodeObjectForKey:@"serialNumber"]];
+        [self setImageKey:[aDecoder decodeObjectForKey:@"imageKey"]];
+        // decode an integer
+        [self setValueInDollars:[aDecoder decodeIntForKey:@"valueInDollars"]];
+        dateCreated = [aDecoder decodeObjectForKey:@"dataCreated"];
+    }
+    
+    return self;
+}
 @end
