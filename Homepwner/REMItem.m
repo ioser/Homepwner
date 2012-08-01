@@ -48,6 +48,15 @@
     return newItem;
 }
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+		dateCreated = [[NSDate alloc] init];
+    }
+    return self;
+}
+
 //
 // The designated initializer
 //
@@ -55,13 +64,12 @@
         valueInDollars:(int)theValue
           serialNumber:(NSString *)theSerialNumber
 {
-    self = [super init];
+    self = [self init];
     
 	if (self) {
 		self.itemName = theItemName;
 		self.valueInDollars = theValue;
 		self.serialNumber = theSerialNumber;
-		dateCreated = [[NSDate alloc] init];
     }
 	
     return self;

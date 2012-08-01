@@ -17,7 +17,11 @@
 {
 	self = [super init];
 	if (self) {
-		allItems = [[NSMutableArray alloc] init];
+        NSString *fromPath = [self itemArchivePath];
+        allItems = [NSKeyedUnarchiver unarchiveObjectWithFile:fromPath];
+        if (allItems == nil) {
+            allItems = [[NSMutableArray alloc] init];
+        }
 	}
 	
 	return self;
@@ -30,7 +34,8 @@
 
 - (REMItem *)createItem
 {
-	REMItem *result = [REMItem randomItem];
+//	REMItem *result = [REMItem randomItem];
+	REMItem *result = [[REMItem alloc] init];
 	
 	[allItems addObject:result];
 	
