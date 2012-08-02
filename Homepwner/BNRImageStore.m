@@ -34,8 +34,20 @@
     self = [super init];
     if (self) {
         dictionary = [[NSMutableDictionary alloc] init];
+        // Register to receive low memory warnings
+        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+        [notificationCenter addObserver:self 
+                               selector:@selector(clearCache:) 
+                                   name:UIApplicationDidReceiveMemoryWarningNotification 
+                                 object:nil];
     }
     return self;
+}
+
+- (void)clearCache:(NSNotification *)note
+{
+    NSLog(@"Clearing image dictionary of %d instances", [dictionary count]);
+    [dictionary removeAllObjects];
 }
 
 - (void)setImage:(UIImage *)image forKey:(NSString *)key
