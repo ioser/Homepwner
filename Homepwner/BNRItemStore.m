@@ -8,6 +8,7 @@
 
 #import "BNRItemStore.h"
 #import "REMItem.h"
+#import "BNRImageStore.h"
 
 #define ITEMS_ARCHIVE_NAME @"items.archive"
 
@@ -54,6 +55,11 @@
 
 - (void)removeItem:(REMItem *)item
 {
+    // If there is an image, we need to delete/remove it from the file system
+    NSString *imageKey = [item imageKey];
+    if (imageKey) {
+        [[BNRImageStore sharedStore] deleteImageForKey:imageKey];
+    }
     [allItems removeObjectIdenticalTo:item];
 }
 
