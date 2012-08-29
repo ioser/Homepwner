@@ -12,6 +12,7 @@
 
 // Used as the key to the item's image in the shared image store
 @synthesize imageKey;
+@synthesize thumbnailImageData;
 
 + (id)randomItem
 {
@@ -87,12 +88,33 @@
 	return self;
 }
 
+@synthesize thumbnailImage;
+- (UIImage *)thumbnailImage {
+    // If there is no thumbnail data, then we have nothing to return
+    if (!thumbnailImageData) {
+        return nil;
+    }
+    
+    //
+    if (!thumbnailImage) {
+        thumbnailImage = [UIImage imageWithData:thumbnailImageData];
+    }
+    
+    return thumbnailImage;
+}
+
 @synthesize containedItem;
 - (void)setContainedItem:(REMItem *)item;
 {
 	containedItem = item;
 	[item setContainer:self];
 }
+
+- (void)setThumbnailImageDataFromImage:(UIImage *)theThumbnailImage
+{
+    self.thumbnailImage = theThumbnailImage;
+}
+
 //
 //- (BNRItem *)containedItem
 //{

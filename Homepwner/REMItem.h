@@ -25,9 +25,14 @@
 //- (void)setContainedItem:(BNRItem *)item;
 //- (BNRItem *)containedItem;
 
-@property (nonatomic, weak) REMItem *container;
+@property (nonatomic, weak) REMItem *container; // Why is this a weak connection?
 //- (void)setContainer:(BNRItem *)item;
 //- (BNRItem *)getContainer;
+
+@property (nonatomic, strong) UIImage *thumbnailImage;
+@property (nonatomic, strong) NSData *thumbnailImageData;
+
+- (void)setThumbnailImageDataFromImage:(UIImage *)thumbnailImage;
 
 - (void)doSomethingWeird;
 

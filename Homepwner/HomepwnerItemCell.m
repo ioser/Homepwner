@@ -9,6 +9,10 @@
 #import "HomepwnerItemCell.h"
 
 @implementation HomepwnerItemCell
+@synthesize thumbnailView;
+@synthesize nameLabel;
+@synthesize serialNumberLabel;
+@synthesize valueLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

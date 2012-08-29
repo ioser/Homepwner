@@ -9,6 +9,7 @@
 
 #import "ItemsViewController.h"
 #import "BNRItemStore.h"
+#import "BNRImageStore.h"
 #import "REMItem.h"
 
 #define NUM_OF_SECTIONS 1
@@ -113,6 +114,17 @@
     [self presentViewController:navigationController animated:YES completion:nil];
 
     
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    //Load our custom cell view xib/nib
+    UINib *nib = [UINib nibWithNibName:@"HomepwnerItemCell" bundle:nil];
+    
+    //Register this nib/xib with the table view
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"HomepwnerItemCell"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -271,13 +283,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Before creating a new cell instance, check for a reusable one
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+    HomepwnerItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomepwnerItemCell"];
     
-    if (!cell) {
-        // Create an instance of UITableViewCell with default appearance
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  
-                                      reuseIdentifier:@"UITableViewCell"];
-    }
+//    if (!cell) {
+//        // Create an instance of UITableViewCell with default appearance
+//        cell = [[HomepwnerItemCell alloc] initWithStyle:UITableViewCellStyleDefault  
+//                                      reuseIdentifier:@"HomepwnerItemCell"];
+//    }
 	
     int row = [indexPath row];
     NSInteger section = [indexPath section];
@@ -287,10 +299,14 @@
         // Set the text on the cell with the description of the item
         // that is at the nth index of the items, where n = row this cell
         // will appear in on the table view
-        description = [[[[BNRItemStore sharedStore] allItems] objectAtIndex:[indexPath row]] description];
+        REMItem *item = [[[BNRItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
+        [cell.thumbnailView setImage:[[BNRImageStore sharedStore] imageForKey:item.imageKey]];
+        [cell.nameLabel setText:item.itemName];
+        [cell.serialNumberLabel setText:item.serialNumber];
+        [cell.valueLabel setText: [NSString stringWithFormat:@"$%d", [item valueInDollars]]];
+    } else {
+        [cell.textLabel setText:description]; // The contents of the cell.
     }
-	
-	[cell.textLabel setText:description];
     
     NSLog(@"Setting cell value for row %d and section %d",
           row, section);
