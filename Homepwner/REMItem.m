@@ -8,6 +8,9 @@
 
 #import "REMItem.h"
 
+#define THUMB_WIDTH 40
+#define THUMB_HEIGHT 40
+
 @implementation REMItem
 
 // Used as the key to the item's image in the shared image store
@@ -110,9 +113,46 @@
 	[item setContainer:self];
 }
 
-- (void)setThumbnailImageDataFromImage:(UIImage *)theThumbnailImage
+- (void)setThumbnailImageDataFromImage:(UIImage *)originalImage
 {
-    self.thumbnailImage = theThumbnailImage;
+//    self.thumbnailImage = theThumbnailImage;
+    CGSize originalImageSize = [originalImage size];
+    
+    CGRect thumbRect = CGRectMake(0, 0, THUMB_WIDTH, THUMB_HEIGHT);
+    
+    // Figure out a scaling ratio to ensure the same aspect ratio
+    float ratio = MAX(thumbRect.size.width / originalImageSize.width,
+                       thumbRect.size.height / originalImageSize.height);
+    
+    // Create a transparent bitmap context with a scaling factor equal to that of the screen
+    UIGraphicsBeginImageContextWithOptions(thumbRect.size, NO, 0.0);
+    
+    // Create a path that is a rounded rectangle
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:thumbRect cornerRadius:5.0];
+    
+    // Make all subsequent drawing clip to this rounded rectangle
+    [path addClip];
+    
+    // Center the thumbnail image to the thumbnail size rectangle
+    CGRect projectRect;
+    projectRect.size.width = ratio * originalImageSize.width;
+    projectRect.size.height = ratio * originalImageSize.height;
+    projectRect.origin.x = (thumbRect.size.width - projectRect.size.width) / 2.0;
+    projectRect.origin.y = (thumbRect.size.height - projectRect.size.height) / 2.0;
+    
+    // Draw the thumnail image onto the project rectangle
+    [originalImage drawInRect:projectRect];
+    
+    // Extract the image from the image context and keep it as our thumbnail image
+    UIImage *theThumbnailImage = UIGraphicsGetImageFromCurrentImageContext();
+    [self setThumbnailImage:theThumbnailImage];
+    
+    // Now get the PNG representation of the image and set it as our archivable data
+    NSData *thumbnailImageData = UIImagePNGRepresentation(theThumbnailImage);
+    [self setThumbnailImageData:thumbnailImageData];
+    
+    // Cleanup/close the image context resources
+    UIGraphicsEndImageContext();
 }
 
 //
@@ -188,6 +228,7 @@
     [aCoder encodeObject:serialNumber forKey:@"serialNumber"];
     [aCoder encodeObject:dateCreated forKey:@"dataCreated"];
     [aCoder encodeObject:imageKey forKey:@"imageKey"];
+    [aCoder encodeObject:thumbnailImageData forKey:@"thumbnailImageData"];
     // encode an integer
     [aCoder encodeInt:valueInDollars forKey:@"valueInDollars"];
 }
@@ -200,6 +241,7 @@
         [self setItemName:[aDecoder decodeObjectForKey:@"itemName"]];
         [self setSerialNumber:[aDecoder decodeObjectForKey:@"serialNumber"]];
         [self setImageKey:[aDecoder decodeObjectForKey:@"imageKey"]];
+        [self setThumbnailImageData:[aDecoder decodeObjectForKey:@"thumbnailImageData"]];
         // decode an integer
         [self setValueInDollars:[aDecoder decodeIntForKey:@"valueInDollars"]];
         dateCreated = [aDecoder decodeObjectForKey:@"dataCreated"];

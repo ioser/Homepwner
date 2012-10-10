@@ -87,6 +87,11 @@
     return result;
 }
 
++ (int)count
+{
+    return [[[self sharedStore] allItems] count];
+}
+
 + (BNRItemStore *)sharedStore
 {
 	static BNRItemStore *sharedStore = nil; // This line is executed only once per launch of the application

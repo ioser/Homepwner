@@ -173,6 +173,7 @@
         [[self item] setImageKey:imageKey];
         [[BNRImageStore sharedStore] setImage:pickedImage forKey:imageKey];
         [imageView setImage:pickedImage]; // set the image in the view
+        [item setThumbnailImage:pickedImage]; // create and set the thumbnail of the image
         
         // Enable the delete image bar button item since we have an picture/image now
         [trashButtonItem setEnabled:YES];

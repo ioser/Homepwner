@@ -10,7 +10,7 @@
 #import "DetailViewController.h"
 #import "HomepwnerItemCell.h"
 
-@interface ItemsViewController : UITableViewController
+@interface ItemsViewController : UITableViewController<UITableViewDataSource>
 {
 //    IBOutlet UIView *headerView;
 }
@@ -18,5 +18,7 @@
 //- (UIView *)headerView;
 - (IBAction)addNewItem:(id)sender;
 //- (IBAction)toggleEditingMode:(id)sender;
+
+- (void)showImage:(id)sender atIndexPath:(NSIndexPath *)indexPath;
 
 @end

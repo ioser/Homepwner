@@ -16,6 +16,7 @@
 	NSMutableArray *allItems;
 }
 
++ (int)count;
 + (BNRItemStore *)sharedStore;
 
 - (NSArray *)allItems;

@@ -151,8 +151,15 @@
     int row = [indexPath row];
     int section = [indexPath section];
 
-    if (row >= [tableView numberOfRowsInSection:section] - 1) {
+    int numRows = [tableView numberOfRowsInSection:section];
+    if (row >= numRows - 1) {
         result = YES;
+    }
+    
+    numRows = [BNRItemStore count];
+    if (row >= numRows - 1) {
+//        result = YES;
+        NSLog(@"Number of rows is %d", numRows);
     }
     
     return result;
@@ -284,6 +291,12 @@
 {
     // Before creating a new cell instance, check for a reusable one
     HomepwnerItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomepwnerItemCell"];
+    if ([cell.textLabel text] != Nil) {
+        NSLog(@"Reusable cell text label: %@", [cell.textLabel text]);  // Since we're reusing a cell, we need to clear any existing text label
+        [cell.textLabel setText:Nil];
+    }
+    [cell setItemsViewController:self];
+    [cell setTableView:tableView];
     
 //    if (!cell) {
 //        // Create an instance of UITableViewCell with default appearance
@@ -300,7 +313,14 @@
         // that is at the nth index of the items, where n = row this cell
         // will appear in on the table view
         REMItem *item = [[[BNRItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
-        [cell.thumbnailView setImage:[[BNRImageStore sharedStore] imageForKey:item.imageKey]];
+        UIImage *thumbnailImage = [item thumbnailImage];
+        if (thumbnailImage == Nil) {
+            UIImage *originalImage = [[BNRImageStore sharedStore] imageForKey:item.imageKey];
+            [item setThumbnailImageDataFromImage:originalImage];
+            thumbnailImage = [item thumbnailImage];
+        }
+//        [cell.thumbnailView setImage:[[BNRImageStore sharedStore] imageForKey:item.imageKey]]; // Full size image
+        [cell.thumbnailView setImage:[item thumbnailImage]];
         [cell.nameLabel setText:item.itemName];
         [cell.serialNumberLabel setText:item.serialNumber];
         [cell.valueLabel setText: [NSString stringWithFormat:@"$%d", [item valueInDollars]]];
@@ -313,5 +333,16 @@
 	
 	return cell;
 }
+
+- (void)showImage:(id)sender atIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Going to show the image for %@", indexPath);
+}
+
+- (void)cow
+{
+    NSLog(@"Going to show the cow for %@", @"Moo!");
+}
+
 
 @end
